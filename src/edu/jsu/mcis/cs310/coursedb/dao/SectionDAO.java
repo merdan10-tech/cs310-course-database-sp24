@@ -29,8 +29,20 @@ public class SectionDAO {
             
             if (conn.isValid(0)) {
                 
-                // INSERT YOUR CODE HERE
+                // Prepare the SQL statement for finding sections based on term, subject, and number
+                ps = conn.prepareStatement(QUERY_FIND);  
                 
+                // Set the parameters for the SQL statement
+                ps.setInt(1, termid);                                     
+                ps.setString(2, subjectid);                             
+                ps.setString(3, num);
+                
+                // Execute the SQL statement
+                rs = ps.executeQuery(); 
+                
+                // Converting the result set to a JSON string 
+                result = DAOUtility.getResultSetAsJson(rs); 
+              
             }
             
         }
